@@ -15,11 +15,13 @@ datasource db {
 
 model Customer {
   id        String   @id @default(uuid())
-  username  String
-  email     String
+  username  String   @unique
+  email     String   @unique
   createdAt DateTime @default(now())
 
   Order Order[]
+
+  @@unique([username, email])
 }
 
 model Order {
@@ -34,7 +36,7 @@ model Order {
 
 model Product {
   id            String          @id @default(uuid())
-  name          String
+  name          String          @unique
   value         Float
   createdAt     DateTime        @default(now())
   Order_Product Order_Product[]
