@@ -1,0 +1,47 @@
+version: '3.0'
+
+services:
+  customers_postgresql:
+    image: postgres
+    environment:
+      - POSTGRES_DB=sales_db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - '5432:5432'
+    volumes:
+      - customers_data:/var/lib/postgresql/data
+  
+  orders_postgresql:
+    image: postgres
+    environment:
+      - POSTGRES_DB=orders_db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    ports:
+      - '15432:5432'
+    volumes:
+      - orders_relational_data:/var/lib/postgresql/data
+
+  orders_redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    volumes:
+      - orders_data:/bitnami/redis/data
+
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+
+volumes:
+  customers_data:
+  orders_data:
+  orders_relational_data:
