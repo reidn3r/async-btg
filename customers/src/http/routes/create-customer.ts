@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
-import { CustomerSchema } from '../adapter/customer-schema';
+import { CustomerSchema } from '../adapter/schema/customer-schema';
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { CreateCustomerOptions } from '../adapter/create-customer-options';
+import { CreateCustomerOptions } from '../adapter/options/create-customer-options';
 
 export async function CreateCustomer(app:FastifyInstance, options:CreateCustomerOptions) {
     app

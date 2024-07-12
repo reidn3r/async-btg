@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
-import { ProductSchema } from '../adapter/product-schema';
+import { ProductSchema } from '../adapter/schema/product-schema';
 import { CreateProductOptions } from '../adapter/create-product-options';
 
 export async function CreateProduct(app:FastifyInstance, options:CreateProductOptions){
