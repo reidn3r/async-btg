@@ -12,3 +12,44 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Customer {
+  id        String   @id @default(uuid())
+  username  String
+  email     String
+  createdAt DateTime @default(now())
+
+  Order Order[]
+}
+
+model Order {
+  id        String   @id @default(uuid())
+  value     Float //PostgreSQL Double Precision
+  createdAt DateTime @default(now())
+
+  customer      Customer        @relation(fields: [customerId], references: [id])
+  customerId    String
+  Order_Product Order_Product[]
+}
+
+model Product {
+  id            String          @id @default(uuid())
+  name          String
+  value         Float
+  createdAt     DateTime        @default(now())
+  Order_Product Order_Product[]
+}
+
+model Order_Product {
+  unitary_value Float
+  quantity      Int
+  createdAt     DateTime @default(now())
+
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+
+  @@id([orderId, productId])
+}
