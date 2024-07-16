@@ -37,4 +37,30 @@ export class CustomerRepository{
             }
         });
     }
+
+    async getOrders(customerId:string){
+        return await prisma.customer.findMany({
+            select:{
+                Order:{
+                    select:{
+                        value:true,
+                        createdAt:true,
+                        Order_Product:{
+                            select:{
+                                product:{
+                                    select:{
+                                        name:true,
+                                        value:true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            where: {
+                id:customerId
+            }
+        })
+    }
 }

@@ -10,4 +10,8 @@ export class CustomerServices extends CustomerRepository{
     async findCustomerByUsernameEmail(username:string, email:string){
         return await this.findCustomerByUsernameEmail(username, email);
     }
+
+    async getOrdersByCustomerId(customerId:string){
+        return await this.getOrders(customerId);
+    }
 }
