@@ -3,6 +3,11 @@
 
 <hr>
 
+### Architecture:
+<p align="center">
+    <img src="https://raw.githubusercontent.com/reidn3r/async-btg/main/assets/architecture.png" alt="Software Architecture">
+</p>
+
 ## Detalhes:
     1.0: Serviço "Customers"
     
