@@ -1,10 +1,10 @@
 import dotenv from 'dotenv';
 import fastify from 'fastify';
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
-import { redis } from '../../db/redis';
 import { RabbitMQ } from '../amqp/rabbitmq';
-import { RedisRead } from './services/redis-read-data';
-import { RedisStoreData } from './services/redis-store-data';
+import { redis } from '../../db/redis';
+import { RedisRead } from './services/redis-read';
+import { RedisStore } from './services/redis-store';
 import { GetOrderAmount } from './routes/get-order-amount';
 import { GetOrderValue } from './routes/get-order-value';
 dotenv.config();
@@ -20,19 +20,20 @@ app.setValidatorCompiler(validatorCompiler);
 
 //Services instances
 const rabbitmq = new RabbitMQ(amqp_uri);
-const redisStoreData = new RedisStoreData();
-const redisRead = new RedisRead();
+const store = new RedisStore();
+const read = new RedisRead();
 
 //routes
-app.register(GetOrderAmount, { redisRead });
-app.register(GetOrderValue, { redisRead });
+app.register(GetOrderAmount, { read });
+app.register(GetOrderValue, { read });
 
 const PORT = 8000;
 app.listen({ port: PORT }, async() => {
     await Promise.all([rabbitmq.start(), redis.connect()]);
+    
     await rabbitmq.consume(queue, async(message) => {
         const payload = JSON.parse(message.content.toString());
-        await redisStoreData.execute(payload);
+        await store.execute(payload);
         
     });
     console.log(`orders-service: http://localhost:${PORT}`);

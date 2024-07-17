@@ -1,5 +1,5 @@
-import { RedisRead } from "../../services/redis-read-data";
+import { RedisRead } from "../../services/redis-read";
 
 export interface RedisReadOptions {
-    redisRead: RedisRead
+    read: RedisRead
 }

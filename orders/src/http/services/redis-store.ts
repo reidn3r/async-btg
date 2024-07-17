@@ -1,7 +1,7 @@
 import { redis } from '../../../db/redis';
 import { MessagePayload } from '../../../../customers/src/http/adapter/types/message-type';
 
-export class RedisStoreData {
+export class RedisStore {
     
     async execute(payload:MessagePayload):Promise<void>{
         try{

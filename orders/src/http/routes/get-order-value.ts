@@ -8,10 +8,10 @@ export async function GetOrderValue(app:FastifyInstance, options:RedisReadOption
         .withTypeProvider<ZodTypeProvider>()
         .get('/orders/value/:id', UUIDParams, async(request, reply) => {
             const { id } = request.params;
-            const { redisRead } = options;
+            const { read } = options;
 
             try{
-                const data = await redisRead.getOrderValue(id);
+                const data = await read.getOrderValue(id);
                 if(!data) throw new Error(`Order ${id} not found`);
                 
                 const response = {

@@ -8,9 +8,9 @@ export async function GetOrderAmount(app:FastifyInstance, options:RedisReadOptio
         withTypeProvider<ZodTypeProvider>()
         .get('/orders/amount/:id', UUIDParams, async(request,reply) => {
             const { id } = request.params;
-            const { redisRead } = options;
+            const { read } = options;
             try{
-                const amount:number|null = await redisRead.getOrdersAmount(id);
+                const amount:number|null = await read.getOrdersAmount(id);
                 if(!amount) throw new Error(`Service not able to found customer ${id}`);
 
                 const response = {
