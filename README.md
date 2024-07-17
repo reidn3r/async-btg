@@ -1,9 +1,9 @@
-<h2 align="center"> Processamento Assíncrono: Aplicação  </h2>
+<h2 align="center"> Processamento Assíncrono </h2>
 <p align="center">  Desafio Backend BTG Pactual (07/2024)</p>
 
 <hr>
 
-### Architecture:
+### Arquitetura:
 <p align="center">
     <img src="https://raw.githubusercontent.com/reidn3r/async-btg/main/assets/architecture.png" alt="Software Architecture">
 </p>
@@ -29,7 +29,7 @@
         - 3.1: CORS evita que o cliente acesse direto o serviço "orders"
 
 
-## Linkedin and Gmail
+## Linkedin e Gmail
 <p align="center">
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/reidner-adnan-b19377210) 	[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rdn.adn00@gmail.com)
