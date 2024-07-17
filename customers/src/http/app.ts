@@ -8,6 +8,8 @@ import { CustomerServices } from './services/customer-services';
 import { OrderServices } from './services/order-services';
 import { ProductServices } from './services/product-services';
 import { RabbitMQ } from '../amqp/rabbitmq';
+import { GetTotalOrderValue } from './routes/get-order-total-value';
+import { GetOrdersAmount } from './routes/get-order-amount';
 
 //Fastify Instance
 const app = fastify();
@@ -28,6 +30,8 @@ app.register(CreateCustomer, { customerServices });
 app.register(CreateProduct, { productServices });
 app.register(CreateOrder, { orderServices, customerServices, productServices, rabbitmq });
 app.register(GetOrderList, { customerServices });
+app.register(GetTotalOrderValue);
+app.register(GetOrdersAmount);
 
 const PORT:number = 3000;
 app.listen({ port: PORT }, async() => {
