@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import fastify from 'fastify';
+import cors from '@fastify/cors';
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
 import { RabbitMQ } from '../amqp/rabbitmq';
 import { redis } from '../../db/redis';
@@ -23,11 +24,18 @@ const rabbitmq = new RabbitMQ(amqp_uri);
 const store = new RedisStore();
 const read = new RedisRead();
 
+//cors
+const url = process.env.SALES_SERVICE as string;
+app.register(cors, {
+    origin: [url],
+    methods: ['GET']
+});
+
 //routes
 app.register(GetOrderAmount, { read });
 app.register(GetOrderValue, { read });
 
-const PORT = 8000;
+const PORT:number = 8000;
 app.listen({ port: PORT }, async() => {
     await Promise.all([rabbitmq.start(), redis.connect()]);
     
