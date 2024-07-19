@@ -19,6 +19,37 @@
 </p>
 
 
+## Requisição: /create/customer
+    {
+        "email": "lorem@ipsum.br",
+        "username": "lorem ipsum"
+    }
+
+## Requisição: /create/product
+    {
+        "name": "product_name"
+        "value": 3150,
+    }
+
+## Requisição: /create/order
+    {
+        "email": "lorem@ipsum.br",
+        "products": [
+            {
+                "name": "product_1",
+                "quantity": 2
+            },
+            {
+                "name": "product_2",
+                "quantity": 1
+            },
+            {
+                "name": "product_3",
+                "quantity": 7
+            }
+        ]
+    }
+
 ## Detalhes:
     1.0: Serviço "Customers"
     
