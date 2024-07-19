@@ -1,5 +1,6 @@
 import { redis } from '../../../db/redis';
 import { MessagePayload } from '../../../../customers/src/http/adapter/types/message-type';
+import { Report } from '../services/report-message';
 
 export class RedisStore {
     private expireTimeSeconds:number = 60*60*24*30; // 30 dias em segundos
@@ -100,6 +101,13 @@ export class RedisStore {
     }
 
     async cleanUpExpiredMembers() {
+        const report = new Report();
+        const date = new Date();
+
+        const year:number = date.getFullYear();
+        const month:number = date.getMonth();
+
+        await report.execute(month, year);        
         await Promise.all([
             this.removeExpiredMembers("products::best_seller_products_value"),
             this.removeExpiredMembers("products::best_seller_products_amount"),
@@ -107,6 +115,7 @@ export class RedisStore {
             this.removeExpiredMembers("customers::best_customers"),
             this.removeExpiredMembers("orders::most_expensive_orders")
         ]);
+        console.log("memo is clean");
     }
 
     async clean(time:number){

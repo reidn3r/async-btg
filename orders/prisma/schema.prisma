@@ -13,35 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Order {
-  id           String         @id
-  customer_id  String
-  total_value  Float
-  createdAt    DateTime
-  Order_Report Order_Report[]
-}
-
 model Order_Report {
+  id        String   @id @default(uuid())
   month     Int
   year      Int
   createdAt DateTime @default(now())
 
   report   Report @relation(fields: [reportId], references: [id])
-  reportId String
-
-  order   Order  @relation(fields: [orderId], references: [id])
-  orderId String
-
-  @@id([orderId, reportId])
+  reportId String @unique
 }
 
 model Report {
-  id                       String   @id
-  most_profitable_product  String
-  most_profitable_customer String
-  best_seller_product      String
-  best_seller_customer     String
-  most_expensive_order     String
+  id                       String   @id @default(uuid())
+  most_profitable_product  String?
+  most_profitable_customer String?
+  best_seller_product      String?
+  best_seller_customer     String?
+  most_expensive_order     String?
   createdAt                DateTime @default(now())
 
   Order_Report Order_Report[]

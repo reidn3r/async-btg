@@ -38,12 +38,10 @@ app.register(GetOrderValue, { read });
 const PORT:number = 8000;
 app.listen({ port: PORT }, async() => {
     await Promise.all([rabbitmq.start(), redis.connect()]);
-    
     await rabbitmq.consume(queue, async(message) => {
         const payload = JSON.parse(message.content.toString());
         await store.execute(payload);
-        
     });
-    await store.clean(3600000*24); //Dados excluídos a cada 24h
+    await store.clean(3600000*24*30); //Dados excluídos a cada 30 dias
     console.log(`orders-service: http://localhost:${PORT}`);
 })

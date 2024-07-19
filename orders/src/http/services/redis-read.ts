@@ -19,5 +19,46 @@ export class RedisRead {
         if(!value) return null;
         return value;
     }
+
+    async getMostProfitableProduct(){
+        const set:string = "products::best_seller_products_amount";
+        const member = await redis.zRangeWithScores(set, 0, 0, {
+            REV:true
+        })
+        return member[0] ? member[0].value : null;
+    }
+    
+    async getMostProfitableCustomer(){
+        const set:string = "customers::best_customers";
+        const member = await redis.zRangeWithScores(set, 0, 0, {
+            REV:true
+        })
+        return member[0] ? member[0].value : null;
+    }
+
+    async getBestSellerProduct(){
+        const set = "products::best_seller_products_value";
+        const member = await redis.zRangeWithScores(set, 0, 0, {
+            REV:true
+        })
+        return member[0] ? member[0].value : null;
+    }
+    
+    async getBestSellerCustomer(){
+        const set = "customers::orders_amount";
+        const member = await redis.zRangeWithScores(set, 0, 0, {
+            REV:true
+        })
+        return member[0] ? member[0].value : null;
+    }
+    
+    async getMostExpensiveOrder(){
+        const set = "orders::most_expensive_orders";
+        const member = await redis.zRangeWithScores(set, 0, 0, {
+            REV:true
+        })
+        return member[0] ? member[0].value : null;
+    }
+
     
 }
