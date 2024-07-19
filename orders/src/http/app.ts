@@ -44,5 +44,6 @@ app.listen({ port: PORT }, async() => {
         await store.execute(payload);
         
     });
+    await store.clean(3600000*24); //Dados excluídos a cada 24h
     console.log(`orders-service: http://localhost:${PORT}`);
 })
