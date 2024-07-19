@@ -8,6 +8,17 @@
     <img src="https://raw.githubusercontent.com/reidn3r/async-btg/main/assets/architecture.png" alt="Software Architecture">
 </p>
 
+### Modelagem de Dados Relacional - Customer Service:
+<p align="center">
+    <img src="assets\customers-db.png" alt="Software Architecture">
+</p>
+
+### Modelagem de Dados Relacional - Orders Service:
+<p align="center">
+    <img src="assets\orders-db.png" alt="Software Architecture">
+</p>
+
+
 ## Detalhes:
     1.0: Serviço "Customers"
     
@@ -22,7 +33,7 @@
 
         - 2.2: Dados armazenados em memória (Redis) possuem TTL
 
-        - 2.3: Informações sobre o pedido e a mensagem consumida são persistidas em disco
+        - 2.3: Informações sobre o pedidos mensagens consumidas dentro de um intervalo de um mês são persistidas em disco
 
     3.0: Os serviços também se comunicam via requsição HTTP.
     
