@@ -1,37 +1,36 @@
-<h2 align="center"> Processamento Assíncrono </h2>
-<p align="center">  <a href="https://github.com/buildrun-tech/buildrun-desafio-backend-btg-pactual/blob/main/problem.md" target="_blank"> Desafio Backend </a>BTG Pactual (07/2024)</p>
+<h2 align="center"> Asynchronous Processing </h2>
+<p align="center">  <a href="https://github.com/buildrun-tech/buildrun-desafio-backend-btg-pactual/blob/main/problem.md" target="_blank"> Backend Challenge </a>BTG Pactual (07/2024)</p>
 
 <hr>
 
-### Arquitetura:
+### Architecture:
 <p align="center">
     <img src="https://raw.githubusercontent.com/reidn3r/async-btg/main/assets/architecture.png" alt="Software Architecture">
 </p>
 
-### Modelagem de Dados Relacional - Customer Service:
+### Relational Data Modeling - Customer Service:
 <p align="center">
     <img src="assets\customers-db.png" alt="Software Architecture">
 </p>
 
-### Modelagem de Dados Relacional - Orders Service:
+### Relational Data Modeling - Orders Service:
 <p align="center">
     <img src="assets\orders-db.png" alt="Software Architecture">
 </p>
 
-
-## Requisição: /create/customer
+## Request: /create/customer
     {
         "email": "lorem@ipsum.br",
         "username": "lorem ipsum"
     }
 
-## Requisição: /create/product
+## Request: /create/product
     {
         "name": "product_name"
         "value": 3150,
     }
 
-## Requisição: /create/order
+## Request: /create/order
     {
         "email": "lorem@ipsum.br",
         "products": [
@@ -50,32 +49,28 @@
         ]
     }
 
-## Detalhes:
-    1.0: Serviço "Customers"
+## Details:
+    1.0: "Customers" Service
     
-        - 1.1: Responsável pela criação de produtos, clientes e pedidos de clientes.
+        - 1.1: Assigned for creating products, customers, and customer orders.
 
-        - 1.2: Dados sobre o pedido são armazenados no PostgreSQL, e então, informações do mesmo
-        são enviadas por mensageria (exchange do RabbitMQ) para o serviço "orders"
+        - 1.2: Order data is stored in PostgreSQL, and then the information is sent via messaging (RabbitMQ exchange) to the "orders" service.
 
-    2.0: Serviço "Orders".
+    2.0: "Orders" Service.
 
-        - 2.1: Responsável por consumir a mensagem enviada pelo serviço "customers"
+        - 2.1: Assigned for consuming the message sent by the "customers" service.
 
-        - 2.2: Dados armazenados em memória (Redis) possuem TTL
+        - 2.2: Data stored in memory (Redis) has a TTL.
 
-        - 2.3: Informações sobre o pedidos mensagens consumidas dentro de um intervalo de um mês são persistidas em disco
+        - 2.3: Information about orders and messages consumed within a month are persisted to disk.
 
-    3.0: Os serviços também se comunicam via requsição HTTP.
+    3.0: The services also communicate via HTTP requests.
     
-        - 3.1: CORS evita que o cliente acesse direto o serviço "orders"
+        - 3.1: CORS prevents the client from directly accessing the "orders" service.
 
-
-## Linkedin e Gmail
+## LinkedIn and Gmail
 <p align="center">
 
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/reidner-adnan-b19377210) 	[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rdn.adn00@gmail.com)
 
 </p>
-
-
